@@ -4,10 +4,12 @@ import (
 	"database/sql/driver"
 	"encoding/json"
 	"fmt"
+	"time"
 )
 
 type Metadata struct {
-	Names []string `json:"names"`
+	Names []string  `json:"names"`
+	Date  time.Time `json:"date"`
 }
 
 func (m Metadata) Value() (driver.Value, error) {
