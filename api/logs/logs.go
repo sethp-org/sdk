@@ -61,7 +61,6 @@ func (c *Client) loadLogs(element string, param LoadParams) (*LogResult, error) 
 	if err != nil {
 		return nil, err
 	}
-	fmt.Println(req.URL.String())
 	defer req.Body.Close()
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("Token", c.token)
