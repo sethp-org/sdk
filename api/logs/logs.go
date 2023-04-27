@@ -98,9 +98,19 @@ type LogOnlineMetadata struct {
 	OnlineFormat string `json:"online_format"`
 }
 
+type LogOnlineReportMetadata struct {
+	Online LogOnlineMetadata `json:"online"`
+	Report LogReportMetadata `json:"report"`
+}
+
 type LogOnlineResult struct {
 	Logs     []loader.Log      `json:"logs"`
 	Metadata LogOnlineMetadata `json:"metadata"`
+}
+
+type LogOnlineReportResult struct {
+	Logs     []loader.Log            `json:"logs"`
+	Metadata LogOnlineReportMetadata `json:"metadata"`
 }
 
 func (c *Client) Report(param LoadParams) (*LogReportResult, error) {
@@ -130,6 +140,22 @@ func (c *Client) Online(param LoadParams) (*LogOnlineResult, error) {
 	}
 	result.MetadataRaw = nil
 	return &LogOnlineResult{
+		Logs:     result.Logs,
+		Metadata: metadata,
+	}, nil
+}
+
+func (c *Client) OnlineReports(param LoadParams) (*LogOnlineReportResult, error) {
+	result, err := c.loadLogs("online_report", param)
+	if err != nil {
+		return nil, err
+	}
+	var metadata LogOnlineReportMetadata
+	if err := json.Unmarshal(result.MetadataRaw, &metadata); err != nil {
+		return nil, err
+	}
+	result.MetadataRaw = nil
+	return &LogOnlineReportResult{
 		Logs:     result.Logs,
 		Metadata: metadata,
 	}, nil
