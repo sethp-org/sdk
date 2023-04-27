@@ -16,14 +16,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v0.${{ github.run_number }}
+          # tag_name: v0.${{ github.run_number }}
           release_name: Release ${{ github.run_number }}
           draft: false
           prerelease: false
-      # - name: Create Tag
-      #   if: success()
-      #   uses: mathieudutour/github-tag-action@v5
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     tag: v0.${{ github.run_number }}
-      #     message: 'New release: v0.${{ github.run_number }}'
+      - name: Create Tag
+        if: success()
+        uses: mathieudutour/github-tag-action@v5
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          tag: v0.${{ github.run_number }}
+          message: 'New release: v0.${{ github.run_number }}'
