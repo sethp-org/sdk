@@ -17,13 +17,20 @@ type Client struct {
 	http     *http.Client
 }
 
-func New(host string, token string, serverID int) *Client {
+type Settings struct {
+	Host     string
+	Token    string
+	ServerID int
+	Timeout  time.Duration
+}
+
+func New(settings Settings) *Client {
 	return &Client{
-		serverID: serverID,
-		token:    token,
-		host:     host,
+		serverID: settings.ServerID,
+		token:    settings.Token,
+		host:     settings.Host,
 		http: &http.Client{
-			Timeout: 60 * time.Second,
+			Timeout: settings.Timeout,
 		},
 	}
 }
