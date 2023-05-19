@@ -27,13 +27,14 @@ type Settings struct {
 	Password string
 	Secret   string
 	ServerID int
+	Timeout  time.Duration
 }
 
 func New(settings Settings) *Client {
 	return &Client{
 		settings: settings,
 		client: &http.Client{
-			Timeout: 60 * time.Second,
+			Timeout: settings.Timeout,
 		},
 	}
 }
