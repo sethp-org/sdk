@@ -67,6 +67,9 @@ func (c *Client) addGamePanelParams(gamePanelParameters GamePanelParameters) (pa
 	}
 	parameters["listen"] = gamePanelParameters.Listen
 	parameters["type"] = gamePanelParameters.Type
+	if gamePanelParameters.AdditionalParams != nil {
+		parameters["additional_params"] = gamePanelParameters.AdditionalParams
+	}
 	return parameters
 }
 

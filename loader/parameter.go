@@ -19,11 +19,12 @@ type UlogParameters struct {
 }
 
 type GamePanelParameters struct {
-	Nickname string      `json:"nickname"`
-	Reason   string      `json:"reason"`
-	Params   []string    `json:"params"`
-	Date     time.Time   `json:"date"`
-	Dates    []time.Time `json:"dates"`
-	Listen   int         `json:"listen"`
-	Type     string      `json:"type"`
+	Nickname         string            `json:"nickname"`
+	Reason           string            `json:"reason"`
+	Params           []string          `json:"params"`
+	Date             time.Time         `json:"date"`
+	Dates            []time.Time       `json:"dates"`
+	Listen           int               `json:"listen"`
+	Type             string            `json:"type"`
+	AdditionalParams map[string]string `json:"additional_params"`
 }
