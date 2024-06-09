@@ -11,7 +11,7 @@ import (
 
 type Config struct {
 	ClientID     string
-	ClietnSecret string
+	ClientSecret string
 	RedirectURL  string
 	WellKnowURL  string
 	Scope        string
@@ -31,7 +31,7 @@ type OAuth2 struct {
 func New(cfg Config) *OAuth2 {
 	return &OAuth2{
 		clientID:     cfg.ClientID,
-		clientSecret: cfg.ClietnSecret,
+		clientSecret: cfg.ClientSecret,
 		redirectURL:  cfg.RedirectURL,
 		wellKnowURL:  cfg.WellKnowURL,
 		scope:        cfg.Scope,
