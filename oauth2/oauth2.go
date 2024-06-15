@@ -2,6 +2,7 @@ package oauth2
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
 	"net/url"
@@ -146,6 +147,10 @@ func (o *OAuth2) UserInfo(token string) (*UserInfo, error) {
 	var userInfo UserInfo
 	if err := json.NewDecoder(resp.Body).Decode(&userInfo); err != nil {
 		return nil, err
+	}
+
+	if userInfo.Sub == "" {
+		return nil, fmt.Errorf("user not found")
 	}
 
 	return &userInfo, nil
