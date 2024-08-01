@@ -81,7 +81,7 @@ type Token struct {
 	AccessToken string `json:"access_token"`
 }
 
-func (o *OAuth2) Token(code string) (*Token, error) {
+func (o *OAuth2) Token(code string, redirect *string) (*Token, error) {
 	data, err := o.WellKnow()
 	if err != nil {
 		return nil, err
@@ -92,7 +92,11 @@ func (o *OAuth2) Token(code string) (*Token, error) {
 	u.Set("client_secret", o.clientSecret)
 	u.Set("grant_type", "authorization_code")
 	u.Set("code", code)
-	u.Set("redirect_uri", o.redirectURL)
+	redirectAdd := ""
+	if redirect != nil {
+		redirectAdd += "?redirect_uri=" + *redirect
+	}
+	u.Set("redirect_uri", o.redirectURL+redirectAdd)
 
 	var body io.Reader = strings.NewReader(u.Encode())
 	req, err := http.NewRequest(http.MethodPost, data.TokenEndpoint, body)
