@@ -79,7 +79,7 @@ func (c *Client) doRequest(engine string, headers, parameters map[string]interfa
 		return nil, err
 	}
 
-	req, err := http.NewRequest(http.MethodPost, c.settings.Host+"/api/"+engine+"/parse", &buf)
+	req, err := http.NewRequest(http.MethodPost, c.settings.Host+"/logs/"+engine+"/parse", &buf)
 	if err != nil {
 		return nil, err
 	}
